@@ -1,0 +1,176 @@
+<body>
+  <!--
+      hasBackdrop (obscured main): 'true' | 'false'
+      fullscreen: fullscreen sidenav and sidenav-content (main page content)
+    -->
+  <mat-sidenav-container hasBackdrop="true" fullscreen>
+    <!-- SIDENAV CONTENT over main page on click -->
+    <!--
+        mode (how sidenva appearance):
+          - 'side': Sidenav floats over the primary content, which is covered by a backdrop.
+          - 'over': Sidenav pushes the primary content out of its way, also covering it with a backdrop.
+          - 'push': Sidenav appears side-by-side with the main content, shrinking the main content's width to make space for the sidenav.
+        position: 'start' (left) | 'end' (right), side of the page
+      -->
+    <mat-sidenav #shoppingCartDrawer mode="over" position="end">
+      <div *ngIf="shopCart.shoppingCart.length > 0; then thereAreItems else empty"></div>
+      <ng-template #empty>
+        <div id="emptyBasket">
+          <h1>Empty Basket <mat-icon>sentiment_dissatisfied</mat-icon></h1>
+        </div>
+      </ng-template>
+
+      <ng-template #thereAreItems>
+        <!-- print shopping cart list from the shoppingCart var from the ShoppingCartService -->
+        <div *ngFor="let p of shopCart.getShoppingCart()" class="shopCartElem">
+          <mat-grid-list cols="2" rowheight="1:1">
+            <mat-grid-title class="dataItems">
+              <div class="productName">
+                {{p.name}}
+              </div>
+
+              <div>
+                <table id="description">
+                  <tbody>
+                    <tr>
+                      <th>ID</th>
+                      <td>{{p.productNumber}}</td>
+                    </tr>
+                    <tr>
+                      <th>Size</th>
+                      <td>{{p.size}}</td>
+                    </tr>
+                    <tr>
+                      <th>Color</th>
+                      <td>{{p.color}}</td>
+                    </tr>
+                    <tr>
+                      <th>Weight</th>
+                      <td>{{p.weight}}</td>
+                    </tr>
+                    <tr>
+                      <th>Price</th>
+                      <td>{{p.listPrice | currency:'EUR'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </mat-grid-title>
+
+            <mat-grid-title>
+              <div class="qtyModify">
+                <div>
+                  <button mat-stroked-button (click)="shopCart.addPItem(p)">&#43;</button> <!-- + -->
+                  <button mat-stroked-button (click)="shopCart.removeItem(p)">&#45;</button> <!-- - -->
+                </div>
+                <div id="deleteContainer">
+                  <button mat-flat-button id="delete" (click)="shopCart.shoppingCartRemovePItems(p)">
+                    <span class="material-symbols-outlined">
+                      delete
+                    </span>
+                  </button>
+                </div>
+                <div id="qty">
+                  {{shopCart.qty(p)}}
+                </div>
+              </div>
+            </mat-grid-title>
+          </mat-grid-list>
+          <hr>
+        </div>
+
+
+        <div id="submit">
+          <mat-grid-list cols="2" rowHeight="1:1">
+            <mat-grid-tile id="numItems">
+              <div>Quantity: </div>
+              <div id="num">{{shopCart.getNumItems()}}</div>
+            </mat-grid-tile>
+
+            <mat-grid-tile id="totalPrice">
+              <div>Total: </div>
+              <div id="price">{{shopCart.getTotalPrice() | currency:'EUR'}}</div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        <div id="purchase">
+          <button title="Purchase" routerLink="/purchase">
+            <mat-icon id="checkout">shopping_cart_checkout</mat-icon>
+          </button>
+        </div>
+      </ng-template>
+    </mat-sidenav>
+
+    <!-- MAIN (page) CONTENT -->
+    <mat-sidenav-content>
+      <!-- NAVBAR (present on all pages) -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" title="Home" routerLink="/home">
+            <mat-icon>directions_bike</mat-icon>
+          </a>
+
+          <div class="navbarNav">
+            <div class="page">
+              <ul class="navbar-nav">
+                <li id="home">
+                  <a class="nav-link" title="Home" routerLink="/home">Home</a>
+                </li>
+                <li id="customer" *ngIf="isLogged()">
+                  <a class="nav-link" title="Customer" routerLink="/customer">Customer</a>
+                </li>
+                <li id="products">
+                  <a class="nav-link" title="All Products" routerLink="/products">Products</a>
+                </li>
+                <li id="contacts">
+                  <a class="nav-link" title="Contacts" routerLink="/contacts">Contacts</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="interactiveMenu">
+              <!-- SHOPPING CART button -->
+              <div class="shoppingCart">
+                <!-- .toggle(): aziona l'aggiunta/rimozione del contenuto di mat-drawer, ricercando l'elemento shoppingCartDrawer -->
+                <button mat-button id="buttonShoppingCart" (click)="shoppingCartDrawer.toggle()">
+                  <mat-icon [matBadge]="shopCart.getNumItems()" matBadgePosition="before" matBadgeColor="primary"
+                    matBadgeOverlap="true" matBadgeSize="small">shopping_bag</mat-icon>
+                </button>
+              </div>
+
+              <!-- USER button -->
+              <div class="user">
+                <button mat-button [matMenuTriggerFor]="userMenu" id="buttonMenu">
+                  <mat-icon>person</mat-icon>
+                </button>
+                <mat-menu #userMenu="matMenu">
+                  <div *ngIf="isLogged(); then logTrue; else logFalse"> </div>
+                  <ng-template #logTrue>
+                    <button mat-menu-item disabled>{{username}}</button>
+
+                    <button mat-menu-item id="logOutButton" (click)="clearCredentials()">
+                      Log Out
+                    </button>
+                  </ng-template>
+
+                  <ng-template #logFalse>
+                    <button mat-menu-item id="signIn" routerLink="/login">
+                      Sign In
+                    </button>
+                    <button mat-menu-item id="signUp" routerLink="/register">
+                      Sign Up
+                    </button>
+                  </ng-template>
+                </mat-menu>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- router link towards other pages (Angular is a SPA-Single Page Application) -->
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</body>

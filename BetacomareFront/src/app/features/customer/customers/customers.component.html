@@ -1,0 +1,107 @@
+<div *ngIf="logCondition; then isLogged else notLoggedIn"></div>
+
+<ng-template #isLogged>
+  <mat-tab-group>
+    <mat-tab label="Data User">
+      <div class="card">
+        <img src="assets/user.jpg" class="userimg" alt="omino">
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Title</th>
+                <td>{{customerData.title}}</td>
+              </tr>
+              <tr>
+                <th>First Name</th>
+                <td>{{customerData.firstName}}</td>
+              </tr>
+              <tr>
+                <th>Middle Name</th>
+                <td>{{customerData.middleName}}</td>
+              </tr>
+              <tr>
+                <th>Last Name</th>
+                <td>{{customerData.lastName}}</td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                <td>{{customerData.status}}</td>
+              </tr>
+              <tr>
+                <th>Phone</th>
+                <td>{{customerData.phone}}</td>
+              </tr>
+              <tr>
+                <th>Birthday</th>
+                <td>{{customerData.birthday}}</td>
+              </tr>
+              <tr>
+                <th><a class="btn btn-primary">Modify</a></th>
+                <td><a (click)="DeleteUser()" class="btn btn-primary">Unsubscribe</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="My Addresses">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let address">{{address.address1}}</td>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef>City</th>
+          <td mat-cell *matCellDef="let address">{{address.city}}</td>
+        </ng-container>
+
+        <!-- Postal Code Column -->
+        <ng-container matColumnDef="postalCode">
+          <th mat-header-cell *matHeaderCellDef>Postal Code</th>
+          <td mat-cell *matCellDef="let address">{{address.postalCode}}</td>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container matColumnDef="stateProvince">
+          <th mat-header-cell *matHeaderCellDef>State Province</th>
+          <td mat-cell *matCellDef="let address">{{address.stateProvince}}</td>
+        </ng-container>
+
+        <!-- Country Region -->
+        <ng-container matColumnDef="countryRegion">
+          <th mat-header-cell *matHeaderCellDef>Country Region</th>
+          <td mat-cell *matCellDef="let address">{{address.countryRegion}}</td>
+        </ng-container>
+
+        <!-- State -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>State</th>
+          <td mat-cell *matCellDef="let address">{{address.state}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Ordini Precedenti">Working progress</mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<ng-template #notLoggedIn>
+  <div class="card text-center">
+    <img src="assets/wrong.png" class="wrongImg" alt="wrong">
+    <div class="card-header"> Wrong Page</div>
+    <div class="card-body">
+      <p class="card-text">Oh no, you are not logged in!</p>
+      <button routerLink="/login" class="signIn btn btn-primary" >Sign In</button>
+      <button routerLink="/register" class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+</ng-template>

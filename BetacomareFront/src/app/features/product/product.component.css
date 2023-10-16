@@ -1,0 +1,64 @@
+/* -- add/remove items from shopping cart (product list level) -- */
+button#add {
+    color: grey;
+    border-radius: 1em;
+}
+
+/* discontinued product */
+mat-icon#close {
+    color: red;
+}
+
+/* you can add to the shopping cart */
+mat-icon#addShoppingCart {
+    color: green;
+}
+
+/* on the shopping cart */
+mat-icon#removeShoppingCart {
+    color: orange;
+}
+
+
+/* -- slide bar (top page) synchronized with paginator -- */
+#sliderBar {
+    width: 60%;
+}
+
+/* -- mat drawer -- */
+/* fixed dimension of left side-nav */
+.mat-drawer-container {
+    height: 95vh;
+    /* 100vh (max screen) - 5vh (height navbar) */
+}
+
+/* -- left bar drawer -- */
+.mat-drawer {
+    position: none;
+    width: 30%;
+}
+
+.mat-drawer-content{
+    width: 70%;
+}
+
+/* slidebar min/max for price */
+#sliderLabel {
+    width: 31%;
+    display: inline-block;
+    margin-left: 5%;
+    text-align: center;
+}
+
+.laterale {
+    margin-top: 10%;
+}
+
+.reset {
+    margin: 0 auto;
+}
+
+mat-form-field.search {
+    margin: 0 5%;
+    width: 90%;
+}

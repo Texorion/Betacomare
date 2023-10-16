@@ -1,0 +1,130 @@
+#frame1 {
+  /* full screen height */
+  /* for half screen set 50% */
+  height: 20%;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* conteiner of h1 */
+div#title {
+  background: rgba(0, 0, 0, 0.5);
+  /* Black background with 0.5 opacity */
+  padding: 3% 0;
+}
+
+div#title>h1 {
+  font-size: 4vw;
+  font-weight: bold;
+  color: rgb(248, 244, 244);
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+
+iframe.frame_gmaps{
+  width: 80%;
+  height: 60%;
+}
+
+
+mat-grid-tile#textAddress{
+  font-style: italic;
+  display: flex;
+}
+
+table{
+  text-align: center;
+}
+
+.blankRow{
+    height: 2em !important; /* overwrites any other rules */
+}
+
+td#address{
+  font-weight: bold;
+}
+
+
+/* -- form -- */
+h2{
+  text-decoration: underline;
+  margin-bottom: 2%;
+}
+
+form {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  width: fit-content;
+
+  padding: 5% 10%;
+
+  border: 2px solid rgb(167, 167, 167);
+  border-radius: 0.8em;
+
+  margin: 5% auto;
+}
+
+div.name{
+  display: inline-block;
+}
+
+div#firstName,
+div#middleName {
+  margin-right: 2em;
+}
+
+mat-form-field#email {
+  width: 100%;
+}
+
+mat-form-field#textArea{
+  width: 100%;
+}
+
+/* -- Submit button -- */
+div.controlButton {
+  text-align: center;
+  margin-top: 5%;
+}
+
+div.controlButton>button {
+  padding: 0.5em 1em;
+  background-color: #3b96ff;
+  border: none;
+  border-radius: 0.8em;
+}
+
+div.controlButton>button:hover {
+  background-color: #60a6ff;
+}
+
+/* applica lo stile solo se il bottone e' disabled */
+button#register:hover:disabled {
+  cursor: not-allowed;
+}
+
+div.controlButton>button:active:enabled {
+  box-shadow: 0 0.1em #eefeff;
+  /* pressing button */
+  transform: translateY(0.2em);
+  /* a pressione, traslazione verticale verso il basso del <button> */
+}
+
+button#reset{
+  color: white;
+  margin-right: 1em;
+}
+
+p#message1 {
+  text-align: center;
+  color: #3b96ff;
+  margin-top: 2em;
+}
+
+p#message2 {
+  text-align: center;
+  color: red;
+  margin-top: 2em;
+}

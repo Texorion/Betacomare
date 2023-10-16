@@ -1,0 +1,155 @@
+div.form {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  width: fit-content;
+
+  padding: 5% 10%;
+
+  border: 2px solid rgb(167, 167, 167);
+  border-radius: 0.8em;
+
+  margin: 5% auto;
+}
+
+#formTitle{
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 5%;
+}
+
+
+/* -- Name -- */
+div.name {
+  display: inline-block;
+}
+
+div#firstName,
+div#middleName {
+  margin-right: 2em;
+}
+
+/* -- Title -- */
+div#gender {
+  font-weight: bold;
+  width: fit-content;
+  padding-bottom: 0.5em;
+}
+
+label#genderLabel {
+  padding-right: 1em;
+}
+
+mat-radio-button {
+  padding: 0.5em;
+}
+
+/* -- Email -- */
+mat-form-field#emailField {
+  width: 100%;
+}
+
+/* -- Password -- */
+div#password, div#info {
+  display: inline-block;
+}
+
+button#infoButton{  
+  border: none;
+  background-color: white;
+}
+
+ul.dropdown-menu{
+  padding: 0.4em;
+}
+
+ul.dropdown-menu > div{
+  padding: 0.4em;
+}
+
+ul.dropdown-menu > div > span{
+  padding-left: 1em;
+}
+
+div#confirmPassword {
+  float: right;
+}
+
+/* -- Birthday -- */
+div#birthday {
+  display: inline-block;
+}
+
+/* -- Status -- */
+div#status {
+  float: right;
+}
+
+/* -- Address -- */
+div#addressSection{
+  font-weight: bold;
+}
+
+mat-form-field#addressField {
+  width: 100%;
+}
+
+div.lineCityPostal {
+  display: inline-block;
+}
+
+div#postalCode {
+  float: right;
+}
+
+div.lineStateCountry {
+  display: inline-block;
+}
+
+div#countryRegion {
+  float: right;
+}
+
+/* -- Submit button -- */
+div.controlButton {
+  text-align: center;
+  margin-top: 5%;
+}
+
+div.controlButton>button {
+  padding: 0.5em 1em;
+  background-color: #3b96ff;
+  border: none;
+  border-radius: 0.8em;
+}
+
+div.controlButton>button:hover {
+  background-color: #60a6ff;
+}
+
+/* applica lo stile solo se il bottone e' disabled */
+button#register:hover:disabled {
+  cursor: not-allowed;
+}
+
+div.controlButton>button:active:enabled {
+  box-shadow: 0 0.1em #eefeff;
+  /* pressing button */
+  transform: translateY(0.2em);
+  /* a pressione, traslazione verticale verso il basso del <button> */
+}
+
+button#reset{
+  color: white;
+  margin-right: 1em;
+}
+
+p#pswMessage {
+  text-align: center;
+  color: red;
+  margin-top: 2em;
+}
+
+p#message {
+  text-align: center;
+  color: red;
+  margin-top: 2em;
+}

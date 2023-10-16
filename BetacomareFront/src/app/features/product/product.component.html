@@ -1,0 +1,159 @@
+<div id="progBar">
+  <mat-progress-bar mode="determinate" [value]="percentage"></mat-progress-bar>
+</div>
+
+<!-- The drawer component is designed to add side content to a small section of your app. -->
+<mat-drawer-container hasBackdrop="false">
+  <!-- Unmovable LEFT BAR (always opened) -->
+  <mat-drawer mode="side" opened position="start">
+    <div class="laterale">
+      <div>
+        <form #frm="ngForm" (keydown)="Search(frm, $event)">
+          <mat-form-field appearance="fill" class="search">
+            <mat-label>Search</mat-label>
+            <input type="search" matInput name="search" [(ngModel)]="name">
+            <button mat-icon-button matSuffix type="submit">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div>
+        <mat-card class="card-slider">
+          <mat-card-content>
+            <div class="slider">
+              <p>Price:</p>
+              <mat-slider id="sliderBar" [min]="0" [max]="4000">
+                <input matSliderStartThumb [(ngModel)]="min">
+                <input matSliderEndThumb [(ngModel)]="max">
+              </mat-slider>
+              <label id="sliderLabel">{{min | currency:'EUR'}} - {{max | currency:'EUR'}}</label>
+            </div>
+
+            <div>
+              <p>Weight:</p>
+              <mat-form-field appearance="fill">
+                <mat-label>Min</mat-label>
+                <input matInput type="number" [(ngModel)]="min2">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Max</mat-label>
+                <input matInput type="number" [(ngModel)]="max2">
+              </mat-form-field>
+            </div>
+
+            <hr>
+
+            <!-- Color -->
+            <div id="color">
+              <mat-form-field appearance="fill">
+                <mat-label>Color</mat-label>
+                <mat-select type="text" matInput title="Choose a Color" [(ngModel)]="color">
+                  <mat-option *ngFor="let c of colors" [value]="c">
+                    {{c}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+
+                <!-- Size -->
+                <mat-label>Size</mat-label>
+                <mat-select type="text" matInput title="Choose a Color" [(ngModel)]="size">
+                  <mat-option *ngFor="let c of sizes" [value]="c">
+                    {{c}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="reset">
+              <button mat-raised-button color="primary" (click)="resetFilter()"> &#10227;</button>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-drawer>
+
+
+  <!-- MAIN (page) CONTENT -->
+  <mat-drawer-content>
+    <div *ngFor="let p of productsOnPage; index as i">
+      <mat-accordion multi>
+        <!-- hideToggle: nasconde freccia verso il basso per ogni expansion panel -->
+        <mat-expansion-panel #expansionPanel hideToggle [id]="i">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{p.name}}
+            </mat-panel-title>
+
+            <!-- change the appearance of shopping cart button -->
+            <div *ngIf="p.sellEndDate != null; then discontinued else intoProduction"></div>
+
+            <ng-template #discontinued>
+              <mat-panel-description>
+                <span class="badge text-bg-danger">Discontinued</span>
+              </mat-panel-description>
+
+              <button id="add" disabled>
+                <mat-icon id="close">close</mat-icon>
+              </button>
+            </ng-template>
+
+            <!-- change the appearance and functionality of shopping cart button -->
+            <ng-template #intoProduction>
+              <div *ngIf="shopCart.elementExist(p); then thereIsProduct else thereIsntProduct"></div>
+
+              <!--
+                on click viene aggiunto/rimosso un elemento dall'array di shopping cart della sessione 
+                ed expanded evita che, cliccando sul bottone, il pannello si espanda.
+              -->
+              <ng-template #thereIsProduct>
+                <button id="add" (click)="expansionPanel.expanded = true; shopCart.shoppingCartRemovePItems(p)">
+                  <mat-icon id="removeShoppingCart">remove_shopping_cart</mat-icon>
+                </button>
+              </ng-template>
+
+              <ng-template #thereIsntProduct>
+                <button id="add" (click)="expansionPanel.expanded = true; shopCart.shoppingCartAdd(p)">
+                  <mat-icon id="addShoppingCart">add_shopping_cart</mat-icon>
+                </button>
+              </ng-template>
+            </ng-template>
+          </mat-expansion-panel-header>
+
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th>Code</th>
+                <td>{{p.productNumber}}</td>
+              </tr>
+              <tr>
+                <th>Color</th>
+                <td>{{p.color}}</td>
+              </tr>
+              <tr>
+                <th>Size</th>
+                <td>{{p.size}}</td>
+              </tr>
+              <tr>
+                <th>Weight</th>
+                <td>{{p.weight}}</td>
+              </tr>
+              <tr>
+                <th>Price</th>
+                <td>{{p.listPrice}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div id="paginator">
+      <mat-paginator [length]="this.products.length" [pageSize]="10" [pageSizeOptions]="[10,15,20, 25, 50, 100]"
+        (page)="onPageChange($event)" aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

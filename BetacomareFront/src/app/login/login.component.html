@@ -1,0 +1,45 @@
+<div class="form">
+  <form #frmLogin="ngForm"
+    (keydown)="checkEnterSubmit($event, frmLogin);">
+    <!-- Username -->
+    <div class="username">
+      <mat-icon>person</mat-icon>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput name="user" ngModel #user="ngModel" />
+        <button mat-icon-button matSuffix disabled>
+          <mat-icon id="emergency">emergency</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Password -->
+    <div class="password">
+      <mat-icon>lock</mat-icon>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input [type]="hide ? 'password' : 'text'" matInput name="psw" ngModel #psw="ngModel" />
+
+        <button mat-icon-button matSuffix (click)="hide = !hide">
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit">
+      <button id="reset" type="reset">Reset</button>
+      <button id="signin" type="submit" (click)="checkCredentials(frmLogin); loading = !loading">
+        Sign In
+      </button>
+      <div class="loading" *ngIf="loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </form>
+  <p id="message" *ngIf="returnMessage != null">{{returnMessage}}</p>
+  <a routerLink="/register" id="signUp">Sign Up</a>
+
+</div>

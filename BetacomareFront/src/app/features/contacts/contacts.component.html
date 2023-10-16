@@ -1,0 +1,154 @@
+<section id="frame1">
+  <div id="title">
+    <h1>
+      Contacts
+    </h1>
+  </div>
+</section>
+
+<section id="frame2">
+  <mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile>
+      <iframe class="frame_gmaps" alt="Position on the map"
+        src="https://maps.google.com/maps?q=Corso%20Svizzera%20185,%20Torino,%20Italy&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+        title="Betacomare Office">
+      </iframe>
+    </mat-grid-tile>
+
+    <mat-grid-tile id="textAddress">
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td colspan="2" id="address">
+                Corso Svizzera 185, 10149, Torino (TO), Italia
+              </td>
+            </tr>
+            <tr class="blankRow">
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <th>Lunedì</th>
+              <td>09 - 19</td>
+            </tr>
+            <tr>
+              <th>Martedì</th>
+              <td>09 - 19</td>
+            </tr>
+            <tr>
+              <th>Mercoledì</th>
+              <td>09 - 19</td>
+            </tr>
+            <tr>
+              <th>Giovedì</th>
+              <td>09 - 19</td>
+            </tr>
+            <tr>
+              <th>Venerdì</th>
+              <td>09 - 19</td>
+            </tr>
+            <tr>
+              <th>Sabato</th>
+              <td>09 - 12</td>
+            </tr>
+            <tr>
+              <th>Domenica</th>
+              <td>chiuso</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</section>
+
+<!-- Form Contact Us -->
+<section id="frame3">
+  <form #frmRegistration="ngForm">
+    <div>
+      <h2>Contact Us</h2>
+    </div>
+
+    <div>
+      <!-- First Name -->
+      <div class="name" id="firstName">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input type="text" matInput title="First Name example: Mario" maxlength="50" matInput name="firstName" ngModel
+            #firstName="ngModel" required />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon></mat-icon>
+          </button>
+          <mat-error [hidden]="!firstName.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Last Name -->
+      <div class="name" id="lastname">
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input type="text" title="Middle Name example: Rossi" maxlength="50" matInput name="lastName" ngModel
+            #lastName="ngModel" required />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon></mat-icon>
+          </button>
+          <mat-error [hidden]="!lastName.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <mat-form-field appearance="fill" id="email">
+        <mat-label>Email</mat-label>
+        <input type="text" title="Email example: mario.rossi@mail.com" maxlength="50" matInput name="username"
+          #username="ngModel" ngModel required pattern="([a-zA-Z0-9_.])+@([a-zA-Z])+[.]([a-z])+" />
+        <button mat-icon-button matSuffix disabled>
+          <mat-icon>email</mat-icon>
+        </button>
+        <!-- hide/show the error message -->
+        <mat-error [hidden]="!username.errors?.pattern">
+          Not a valid Email
+        </mat-error>
+        <mat-error [hidden]="!username.errors?.required">
+          Can not be empty
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Text Area -->
+    <div>
+      <mat-form-field id="textArea">
+        <mat-label>Write your message for us</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="controlButton">
+      <!-- Reset -->
+      <button type="reset" title="Reset Form" value="reset" id="reset">
+        &#10227; <!-- Clockwise Gapped Circle Arrow -->
+      </button>
+
+      <!-- Submit -->
+      <button type="reset" title="Register" id="register" [disabled]="!frmRegistration.form.valid"
+        (click)="messageSuccess()">
+        Register
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage">
+      <p id="message1" *ngIf="success">
+          {{message1}}
+      </p>
+      <p id="message2" *ngIf="success">
+        {{message2}}
+      </p>
+    </div>
+  </form>
+</section>

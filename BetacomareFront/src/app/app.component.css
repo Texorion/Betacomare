@@ -1,0 +1,32 @@
+.container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
+
+div.form {
+  text-align: center;
+  width: 40%;
+
+  padding: 10%;
+
+  /* border: 2px solid black; */
+  border-radius: 0.8em;
+
+  margin: 0 auto;
+}
+
+input#submit{
+  padding: 0.5em 1em;
+  margin-top: 5%;
+  background-color: #3b96ff;
+  border: none;
+  border-radius: 0.8em;
+}
+
+input#submit:hover{
+  background-color: #60a6ff
+}
+
+input#submit:active { /* pressing button */
+  box-shadow: 0 0.1em #eefeff;
+  transform: translateY(0.2em); /* a pressione, traslazione verticale verso il basso dei <button> */
+}

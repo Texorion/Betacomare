@@ -1,0 +1,28 @@
+# Betacom - 13/03/2023 19:45:35 #
+Exception:   InvalidOperationException
+At Method:   Void ValidateConnectionForExecute(Microsoft.Data.SqlClient.SqlCommand)
+                at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)
+                at Microsoft.Data.SqlClient.SqlConnection.ValidateConnectionForExecute(String method, SqlCommand command)
+                at Microsoft.Data.SqlClient.SqlCommand.ValidateCommand(Boolean isAsync, String method)
+                at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+                at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+                at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+                at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader()
+                at AppConsoleDB.Classes.Impiegato.DeleteImpiegato() in C:\Users\Betacom\Documents\Academy_dotNET-Torino\2023_03_09-AppConsoleDBIntegration\AppConsoleDB\Classes\Impiegato.cs:line 202
+                at AppConsoleDB.Program.Main() in C:\Users\Betacom\Documents\Academy_dotNET-Torino\2023_03_09-AppConsoleDBIntegration\AppConsoleDB\Program.cs:line 72
+Message:     There is already an open DataReader associated with this Connection which must be closed first.
+
+# Betacom - 13/03/2023 19:52:10 #
+Exception:   InvalidOperationException
+At Method:   Void ValidateConnectionForExecute(Microsoft.Data.SqlClient.SqlCommand)
+                at Microsoft.Data.SqlClient.SqlInternalConnectionTds.ValidateConnectionForExecute(SqlCommand command)
+                at Microsoft.Data.SqlClient.SqlConnection.ValidateConnectionForExecute(String method, SqlCommand command)
+                at Microsoft.Data.SqlClient.SqlCommand.ValidateCommand(Boolean isAsync, String method)
+                at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+                at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+                at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+                at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader()
+                at AppConsoleDB.Classes.Impiegato.DeleteImpiegato() in C:\Users\Betacom\Documents\Academy_dotNET-Torino\2023_03_09-AppConsoleDBIntegration\AppConsoleDB\Classes\Impiegato.cs:line 202
+                at AppConsoleDB.Program.Main() in C:\Users\Betacom\Documents\Academy_dotNET-Torino\2023_03_09-AppConsoleDBIntegration\AppConsoleDB\Program.cs:line 72
+Message:     There is already an open DataReader associated with this Connection which must be closed first.
+

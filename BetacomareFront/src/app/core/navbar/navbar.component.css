@@ -1,0 +1,130 @@
+div.navbarNav {
+    width: 100%;
+    height: 5vh;
+}
+
+div.page {
+    display: inline-block;
+}
+
+
+/* -- right navigation button -- */
+div.interactiveMenu {
+    float: right;
+}
+
+div.shoppingCart {
+    display: inline-block;
+}
+
+div.user {
+    display: inline-block;
+}
+
+button#buttonMenu {
+    color: black;
+}
+
+button#logOutButton {
+    text-align: center;
+    color: white;
+}
+
+
+/* -- shopping cart panel -- */
+.mat-sidenav {
+    width: 35%;
+}
+
+/* - Empty - */
+div#emptyBasket {
+    color: grey;
+    padding: 5%;
+    margin: 10%;
+}
+
+/* - shopping cart list items - */
+div.shopCartElem{
+    padding: 5% 5% 0 5%;
+}
+
+mat-grid-title.dataItems {
+    width: fit-content;
+
+    padding: 5%;
+    margin: 10%;
+}
+
+/* list of product data */
+table {
+    white-space: nowrap;
+    /* rimuove le new line automatiche */
+}
+
+td {
+    text-align: right;
+    width: 100%;
+}
+
+/* name of product */
+div.productName {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+
+    margin-bottom: 4%;
+}
+
+button#delete{
+    color: red;
+}
+
+/* button add/remove and qty */
+div.qtyModify{
+    text-align: center;
+}
+
+div#qty{
+    font-weight: bold;
+}
+
+mat-grid-tile#numItems, mat-grid-tile#totalPrice{
+    display: block;
+    font-weight: bold;
+}
+
+.mat-grid-tile-content{
+    height: fit-content;
+}
+
+div#num, div#price{
+    height: fit-content;
+    color: white;
+    background-color: darkorange;
+    padding: 3%;
+    margin-left: 4%;
+    border-radius: 1em;
+}
+
+/* -- Purchase button -- */
+div#purchase {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+  
+  div#purchase>button {
+    padding: 0.5em 1em;
+    background-color: darkorange;
+    border: none;
+    border-radius: 0.8em;
+  }
+  
+  div#purchase>button:hover {
+    background-color: orange;
+  }
+
+  mat-icon#checkout{
+    color: white;
+  }

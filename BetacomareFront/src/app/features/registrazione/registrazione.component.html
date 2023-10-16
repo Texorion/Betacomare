@@ -1,0 +1,374 @@
+<div class="form">
+  <form #frmRegistration="ngForm">
+    <!--
+      Form Field Appearance (mat-form-field):
+       - legacy
+       - standard
+       - fill
+       - outline
+    -->
+
+    <div>
+      <h1 id="formTitle">Registration</h1>
+      <!-- First Name -->
+      <div class="name" id="firstName">
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input type="text" matInput title="First Name example: Mario" maxlength="50" matInput name="firstName" ngModel
+            #firstName="ngModel" required />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon></mat-icon>
+          </button>
+          <mat-error [hidden]="!firstName.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Middle Name -->
+      <div class="name" id="middleName">
+        <mat-form-field appearance="fill">
+          <mat-label>Middle Name</mat-label>
+          <input type="text" title="Middle Name example: Jr." maxlength="50" matInput name="middleName" ngModel
+            #middleName="ngModel" />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon></mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <!-- Last Name -->
+      <div class="name" id="lastName">
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input type="text" title="Last Name example: Rossi" maxlength="50" matInput name="lastName" ngModel
+            #lastName="ngModel" required />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon></mat-icon>
+          </button>
+          <mat-error [hidden]="!lastName.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div id="gender">
+      <label id="genderLabel">Gender:</label>
+      <!-- color: accent/primary/warn -->
+      <mat-radio-group type="text" color="primary" matInput name="title" ngModel #title="ngModel">
+        <mat-radio-button value="Man" title="Man">Man</mat-radio-button>
+        <mat-radio-button value="Woman" title="Woman">Woman</mat-radio-button>
+        <mat-radio-button value="Undefined" title="Undefined">Undefined</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Email -->
+    <div id="email">
+      <mat-form-field appearance="fill" id="emailField">
+        <mat-label>Email</mat-label>
+        <input type="text" title="Email example: mario.rossi@mail.com" maxlength="50" matInput name="username"
+          #username="ngModel" ngModel required pattern="([a-zA-Z0-9_.])+@([a-zA-Z])+[.]([a-z])+" />
+        <button mat-icon-button matSuffix disabled>
+          <mat-icon>email</mat-icon>
+        </button>
+        <!-- hide/show the error message -->
+        <mat-error [hidden]="!username.errors?.pattern">
+          Not a valid Email
+        </mat-error>
+        <mat-error [hidden]="!username.errors?.required">
+          Can not be empty
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Password -->
+    <div id="psw" ngModelGroup="passwords" #passwords="ngModelGroup" appPswMatch>
+      <div id="password">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input [type]="hide ? 'password' : 'text'" maxlength="50" matInput name="psw" [(ngModel)]="passwords.psw"
+            #pswNgModel="ngModel" required appPswValidator appPswUpLetter appPswLowLetter appPswIsDigit />
+          <button mat-icon-button matSuffix [title]="hide ? 'show' : 'hide'" (click)="hide = !hide">
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error [hidden]="!pswNgModel.errors?.pswInvalid">
+            Not a valid password!
+          </mat-error>
+          <mat-error [hidden]="!pswNgModel.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+        <!-- button: psw check and info -->
+        <div id="info">
+          <button id="infoButton" data-bs-toggle="dropdown">
+            <mat-icon>help</mat-icon>
+          </button>
+
+          <ul class="dropdown-menu">
+            <li
+              *ngIf="(!pswNgModel.errors?.pswInvalidLength && !pswNgModel.errors?.required); then validLength else invalidLength">
+            </li>
+            <ng-template #validLength>
+              <div [ngStyle]="{'color': 'green'}">
+                <mat-icon>check</mat-icon>
+                <span>Minimum 8 characters</span>
+              </div>
+            </ng-template>
+            <ng-template #invalidLength>
+              <div [ngStyle]="{'color': 'red'}">
+                <mat-icon>cancel</mat-icon>
+                <span>Minimum 8 characters</span>
+              </div>
+            </ng-template>
+
+            <li
+              *ngIf="(!pswNgModel.errors?.pswInvalidUpLetter && !pswNgModel.errors?.required); then validUpLetter else invalidUpLetter">
+            </li>
+            <ng-template #validUpLetter>
+              <div [ngStyle]="{'color': 'green'}">
+                <mat-icon>check</mat-icon>
+                <span>At least 1 uppercase letter</span>
+              </div>
+            </ng-template>
+            <ng-template #invalidUpLetter>
+              <div [ngStyle]="{'color': 'red'}">
+                <mat-icon>cancel</mat-icon>
+                <span>At least 1 uppercase letter</span>
+              </div>
+            </ng-template>
+
+            <li
+              *ngIf="(!pswNgModel.errors?.pswInvalidLowLetter && !pswNgModel.errors?.required); then validLowLetter else invalidLowLetter">
+            </li>
+            <ng-template #validLowLetter>
+              <div [ngStyle]="{'color': 'green'}">
+                <mat-icon>check</mat-icon>
+                <span>At least 1 lowercase letter</span>
+              </div>
+            </ng-template>
+            <ng-template #invalidLowLetter>
+              <div [ngStyle]="{'color': 'red'}">
+                <mat-icon>cancel</mat-icon>
+                <span>At least 1 lowercase letter</span>
+              </div>
+            </ng-template>
+
+            <li
+              *ngIf="(!pswNgModel.errors?.pswInvalidIsDigit && !pswNgModel.errors?.required); then validIsDigit else invalidIsDigit">
+            </li>
+            <ng-template #validIsDigit>
+              <div [ngStyle]="{'color': 'green'}">
+                <mat-icon>check</mat-icon>
+                <span>At least 1 digit</span>
+              </div>
+            </ng-template>
+            <ng-template #invalidIsDigit>
+              <div [ngStyle]="{'color': 'red'}">
+                <mat-icon>cancel</mat-icon>
+                <span>At least 1 digit</span>
+              </div>
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div id="confirmPassword">
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input [type]="hide ? 'password' : 'text'" maxlength="50" matInput name="pswCheck"
+            [(ngModel)]="passwords.pswCheck" #pswCheckNgModel="ngModel" required />
+          <button mat-icon-button matSuffix [title]="hide ? 'show' : 'hide'" (click)="hide = !hide">
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error [hidden]="!pswCheckNgModel.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Birthday -->
+    <div id="birthday">
+      <mat-form-field appearance="fill">
+        <mat-label>Birthday</mat-label>
+        <input [matDatepicker]="picker" title="Birthday example: 01/01/2023" maxlength="10" matInput name="birthday"
+          ngModel #birthday.DOB="ngModel" required>
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Status -->
+    <div id="status">
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select type="text" title="Status example: Worker" maxlength="50" matInput name="stat" ngModel
+          #stat="ngModel">
+          <mat-option *ngFor="let s of status" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+        <button [ngSwitch]="stat.value" mat-icon-button matSuffix disabled>
+          <mat-icon *ngSwitchCase="status[1]">school</mat-icon>
+          <mat-icon *ngSwitchCase="status[2]">work</mat-icon>
+          <mat-icon *ngSwitchCase="status[3]">elderly</mat-icon>
+          <mat-icon *ngSwitchDefault>remove</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Phone -->
+    <div id="phone">
+      <mat-form-field appearance="fill">
+        <mat-label>Phone</mat-label>
+        <!-- appPhoneValidator: direttiva validazione numero salvato in phone e collegato con ngModel -->
+        <input type="text" title="Phone example: 1234567890" maxlength="25" matInput name="phone" [(ngModel)]="phone"
+          #phoneNgModel="ngModel" appPhoneValidator />
+        <button mat-icon-button matSuffix disabled>
+          <mat-icon>phone</mat-icon>
+        </button>
+        <!-- Informa l'utente sul tipo di errore -->
+        <mat-error *ngIf="phoneNgModel.errors?.phoneLengthInvalid">
+          Invalid Number! Expected 10 digits.
+        </mat-error>
+        <mat-error *ngIf="phoneNgModel.errors?.phoneNumberInvalid">
+          Invalid Number! Only digits allowed.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <hr>
+
+    <div id="addressSection">
+      <h2>Shipping address</h2>
+
+      <!-- Address -->
+      <div id="address">
+        <mat-form-field appearance="fill" id="addressField">
+          <mat-label>Address</mat-label>
+          <input type="text" title="Address example: Corso Svizzera 185" maxlength="50" matInput name="address" ngModel
+            #address="ngModel" required />
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon>pin_drop</mat-icon>
+          </button>
+          <mat-error [hidden]="!address.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <!-- City -->
+        <div id="city" class="lineCityPostal">
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <input type="text" title="City example: Torino" maxlength="50" matInput name="city" ngModel #city="ngModel"
+              required />
+            <button mat-icon-button matSuffix disabled>
+              <mat-icon>apartment</mat-icon>
+            </button>
+            <mat-error [hidden]="!city.errors?.required">
+              Can not be empty
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Postal Code -->
+        <div id="postalCode" class="lineCityPostal">
+          <mat-form-field appearance="fill">
+            <mat-label>Postal Code</mat-label>
+            <input type="text" title="Postal Code example: 10149" maxlength="15" matInput name="postalCode" ngModel
+              #postalCode="ngModel" required pattern="[0-9]+" />
+            <button mat-icon-button matSuffix disabled>
+              <mat-icon></mat-icon>
+            </button>
+            <mat-error [hidden]="!postalCode.errors?.required">
+              Can not be empty
+            </mat-error>
+            <mat-error [hidden]="!postalCode.errors?.pattern">
+              You can insert only digits
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <!-- State Province -->
+        <div id="stateProvince" class="lineStateCountry">
+          <mat-form-field appearance="fill">
+            <mat-label>State Province</mat-label>
+            <input type="text" title="State Province: Torino" maxlength="50" matInput name="stateProvince" ngModel
+              #stateProvince="ngModel" />
+            <button mat-icon-button matSuffix disabled>
+              <mat-icon></mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <!-- Country Region -->
+        <div id="countryRegion" class="lineStateCountry">
+          <mat-form-field appearance="fill">
+            <mat-label>Country Region</mat-label>
+            <input type="text" title="Country Region example: Piemonte" maxlength="50" matInput name="countryRegion"
+              ngModel #countryRegion="ngModel" />
+            <button mat-icon-button matSuffix disabled>
+              <mat-icon></mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- State -->
+      <div id="state">
+        <mat-form-field appearance="fill">
+          <mat-label>State</mat-label>
+          <!--
+            [matAutocomplete]: direttiva che esegue il binding delle proprieta' in input, portandole in <mat-autocomplete>
+          -->
+          <input type="text" title="State example: Italy" maxlength="50" matInput name="state" ngModel #state="ngModel"
+            (input)="autocomplete($event)" [matAutocomplete]="autoCompState" required />
+          <mat-autocomplete #autoCompState="matAutocomplete">
+            <mat-option *ngFor="let country of countriesFiltered" [value]="country.name">
+              {{country.name}}
+            </mat-option>
+          </mat-autocomplete>
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon></mat-icon>
+          </button>
+          <mat-error [hidden]="!state.errors?.required">
+            Can not be empty
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="controlButton">
+      <!-- Reset -->
+      <button type="reset" title="Reset Form" value="reset" id="reset" (click)="resetForm(frmRegistration)">
+        <!-- Clockwise Gapped Circle Arrow -->
+        &#10227;
+      </button>
+
+      <!-- Submit -->
+      <!--
+        Use the template reference variable, #frmregistration to access the form that contains the Submit button
+        and create an event binding.
+        You will bind the form property that indicates its overall validity to the Submit button's disabled property.
+      -->
+      <button type="submit" title="Register" id="register" [disabled]="!frmRegistration.form.valid"
+        (click)="addForm(frmRegistration)">
+        Register
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage">
+      <p id="pswMessage" *ngIf="passwords.errors?.pswNotMatch">
+        Passwords do not match!
+      </p>
+    </div>
+  </form>
+</div>

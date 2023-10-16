@@ -1,0 +1,10 @@
+<ul>
+    <li *ngFor="let u of usersOnPage">{{u.customerId}} {{u.username}}</li>
+</ul>
+
+<mat-paginator [length]="this.users.length"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 25, 50, 100]"
+    (page)="onPageChange($event)"
+    aria-label="Select page">
+</mat-paginator>
